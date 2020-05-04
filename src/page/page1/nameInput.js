@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 //import { InputBody } from "./styleset1";
 import "./style.css";
 import { useHistory } from "react-router-dom";
+import AppContext from "/src/context/AppContext";
+import { JOIN_NAME } from "/src/actions/actions";
 
-const Nameinput = ({ Names, setNames }) => {
+const Nameinput = () => {
+  const { dispatch } = useContext(AppContext);
   const history = useHistory();
   //入力とその変化
   const [inputTitle, setInputTitle] = useState("");
   //id番号
-  const [count, setCont] = useState(Names.length + 1);
+  //const [count, setCont] = useState(Names.length + 1);
 
   //入力された名前を設定
   const handleInputChange = e => {
@@ -18,15 +21,11 @@ const Nameinput = ({ Names, setNames }) => {
   //次へボタンが押された時の処理
   const handleSubmit = () => {
     if (inputTitle) {
-      setCont(count + 1);
+      dispatch({
+        type: JOIN_NAME,
+        name: inputTitle
+      });
 
-      const newName = {
-        id: count,
-        name: inputTitle,
-        fine: false
-      };
-
-      setNames([...Names, newName]);
       history.push("/wktb");
       setInputTitle("");
     }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "/src/styles.css";
 
 import {
@@ -14,8 +14,12 @@ import {
 } from "./styleset2.js";
 
 import { useHistory } from "react-router-dom";
+import AppContext from "/src/context/AppContext";
 
-const WKTB = ({ Names, setNames }) => {
+import { DELETE_NAME, CHANGE_FINE } from "/src/actions/actions";
+
+const WKTB = () => {
+  const { state, dispatch } = useContext(AppContext);
   const history = useHistory();
   const initialState = [
     {
@@ -66,18 +70,22 @@ const WKTB = ({ Names, setNames }) => {
   const RegstBtn = () => {
     const yon = BtnCheck.filter(t => t.btn === true);
     if (BtnCheck.length === yon.length) {
-      setNames(prev =>
-        prev.map(t => {
-          return { ...t, fine: true };
-        })
-      );
+      dispatch({
+        type: CHANGE_FINE,
+        fine: true
+      });
+
       setTimeout(() => history.push("/resenlist"), 1500);
     }
   };
 
   const Goback = () => {
-    const Cancel = Names.filter(nm => nm.fine === true);
-    setNames(Cancel);
+    //const Cancel = Names.filter(nm => nm.fine === true);
+    //setNames(Cancel);
+    dispatch({
+      type: DELETE_NAME,
+      fine: false
+    });
     history.goBack();
   };
 

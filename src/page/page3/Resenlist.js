@@ -1,26 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Frame, TopTitle, Header, Body, Delebtn, Cpletebtn } from "./styleset3";
 import { useHistory } from "react-router-dom";
+import AppContext from "/src/context/AppContext";
+import { DELETE_NAME } from "/src/actions/actions";
 
-const Resenlist = ({ Names, setNames }) => {
-  const len = Names.length;
-  const FilNames = Names.filter(n => n.fine === true);
+const Resenlist = () => {
+  const { state, dispatch } = useContext(AppContext);
+  const len = state.workmng.length;
+  const FilNames = state.workmng.filter(n => n.fine === true);
   const history = useHistory();
   const [count, setCount] = useState(1);
 
   //退勤
   const Delete = fn => {
-    const DL = FilNames.filter(n => n.id !== fn.id);
-    const DLid = DL.map(dl => {
-      setCount(count + 1);
-      return { ...dl, id: count };
+    //const DL = FilNames.filter(n => n.id !== fn.id);
+    //const DLid = DL.map(dl => {
+    //  setCount(count + 1);
+    //  return { ...dl, id: count };
+    //});
+    //setNames(DLid);
+    dispatch({
+      type: DELETE_NAME,
+      id: fn.id,
+      fine: fn.fine
     });
-    setNames(DLid);
   };
 
   return (
     <>
-      <h1>{len >= 1 ? `${Names[len - 1].name}は出勤しました！` : ""}</h1>
+      <h1>
+        {len >= 1 ? `${state.workmng[len - 1].name}は出勤しました！` : ""}
+      </h1>
       <Frame>
         <TopTitle>出勤リスト</TopTitle>
         <Header>
