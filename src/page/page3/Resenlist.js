@@ -9,7 +9,7 @@ const Resenlist = () => {
   const len = state.workmng.length;
   const FilNames = state.workmng.filter(n => n.fine === true);
   const history = useHistory();
-  const [count, setCount] = useState(1);
+  //const [count, setCount] = useState(1);
 
   //退勤
   const Delete = fn => {
@@ -22,7 +22,7 @@ const Resenlist = () => {
     dispatch({
       type: DELETE_NAME,
       id: fn.id,
-      fine: fn.fine
+      fine: !fn.fine
     });
   };
 

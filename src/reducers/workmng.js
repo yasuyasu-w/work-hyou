@@ -1,4 +1,9 @@
-import { JOIN_NAME, DELETE_NAME, CHANGE_FINE } from "../actions/actions";
+import {
+  JOIN_NAME,
+  DELETE_NAME,
+  CHANGE_FINE,
+  CANCEL_NAME
+} from "../actions/actions";
 const workmng = (state = [], action) => {
   switch (action.type) {
     case JOIN_NAME:
@@ -9,19 +14,17 @@ const workmng = (state = [], action) => {
 
     case DELETE_NAME:
       const DL = state.filter(
-        sbname => sbname.id !== action.id || sbname.fine !== action.fine
+        sbname => sbname.id !== action.id && sbname.fine !== action.fine
       );
       const RN = DL.map((dl, index) => {
-        return { ...dl, id: index };
+        return { ...dl, id: index + 1 };
       });
-      return [...state, ...RN];
+      return [...RN];
 
     case CHANGE_FINE:
-      return state(prev =>
-        prev.map(t => {
-          return { ...t, fine: action.fine };
-        })
-      );
+      return state.map(t => {
+        return { ...t, fine: action.fine };
+      });
 
     default:
       return state;

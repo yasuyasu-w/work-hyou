@@ -82,8 +82,11 @@ const WKTB = () => {
   const Goback = () => {
     //const Cancel = Names.filter(nm => nm.fine === true);
     //setNames(Cancel);
+    const length = state.workmng.length;
+
     dispatch({
       type: DELETE_NAME,
+      id: state.workmng[length - 1].id,
       fine: false
     });
     history.goBack();
