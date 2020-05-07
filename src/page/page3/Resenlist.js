@@ -2,9 +2,12 @@ import React, { useState, useContext } from "react";
 import { Frame, TopTitle, Header, Body, Delebtn, Cpletebtn } from "./styleset3";
 import { useHistory } from "react-router-dom";
 import AppContext from "/src/context/AppContext";
-import { DELETE_NAME } from "/src/actions/actions";
-import { DELETE_HISTORY_LOG } from "/src/actions/actions";
-import nowtime from "/src/nowtime";
+import {
+  DELETE_NAME,
+  ADD_HISTORY_LOG,
+  DELETE_HISTORY_LOG
+} from "/src/actions/actions";
+import { nowtime } from "/src/nowtime";
 
 const Resenlist = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -25,6 +28,12 @@ const Resenlist = () => {
       type: DELETE_NAME,
       id: fn.id,
       fine: !fn.fine
+    });
+
+    dispatch({
+      type: ADD_HISTORY_LOG,
+      description: `${fn.name}が退勤`,
+      historyAt: nowtime()
     });
   };
 

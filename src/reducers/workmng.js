@@ -1,9 +1,4 @@
-import {
-  JOIN_NAME,
-  DELETE_NAME,
-  CHANGE_FINE,
-  CANCEL_NAME
-} from "../actions/actions";
+import { JOIN_NAME, DELETE_NAME, CHANGE_FINE } from "../actions/actions";
 const workmng = (state = [], action) => {
   switch (action.type) {
     case JOIN_NAME:

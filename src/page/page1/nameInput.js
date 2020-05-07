@@ -43,7 +43,10 @@ const Nameinput = () => {
           onChange={handleInputChange}
           required
         />
-        <button onClick={handleSubmit}>次へ</button>
+        <button onClick={handleSubmit} style={{ marginRight: 20 }}>
+          次へ
+        </button>
+        <button onClick={() => history.push("/resenlist")}>履歴へ</button>
       </form>
     </>
   );

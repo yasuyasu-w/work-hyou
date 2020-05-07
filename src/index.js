@@ -21,23 +21,23 @@ const Container = styled.div`
 const LOCAL_KEY = "localKey";
 
 const App = () => {
-  // const localState = localStorage.getItem(LOCAL_KEY);
-  // console.log(localState);
+  const localState = localStorage.getItem(LOCAL_KEY);
+  console.log(localState);
 
   /*
    stateをArray->objectに変更する
   */
-  //const initialState = localState
-  //  ? JSON.parse(localState)
-  //  : {
-  //      workmng: [],
-  //      historyLogs: []
-  //    };
+  const initialState = localState
+    ? JSON.parse(localState)
+    : {
+        workmng: [],
+        historyLogs: []
+      };
 
-  const initialState = {
-    workmng: [],
-    historyLogs: []
-  };
+  // const initialState = {
+  //   workmng: [],
+  //   historyLogs: []
+  // };
   // const initialState = [
   //   {
   //     id: 1,
@@ -50,10 +50,10 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   console.log(state);
 
-  //useEffect(() => {
-  //  const string = JSON.stringify(state);
-  //  localStorage.setItem(LOCAL_KEY, string); // ローカルストレージに値をセット
-  //}, [state]);
+  useEffect(() => {
+    const string = JSON.stringify(state);
+    localStorage.setItem(LOCAL_KEY, string); // ローカルストレージに値をセット
+  }, [state]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
