@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Frame = styled.div`
   width: 800px;
   border: 1px solid black;
-  margin-bottom: 20px;
+  margin-bottom: 100px;
 `;
 
 export const TopTitle = styled.div`

@@ -51,7 +51,6 @@ const App = () => {
   console.log(state);
 
   //useEffect(() => {
-  //  // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify
   //  const string = JSON.stringify(state);
   //  localStorage.setItem(LOCAL_KEY, string); // ローカルストレージに値をセット
   //}, [state]);

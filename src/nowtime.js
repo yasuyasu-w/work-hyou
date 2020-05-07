@@ -1,1 +1,2 @@
-export const nowtime = () => new Date().toISOString();
+export const nowtime = () =>
+  new Date().toLocaleTimeString("en-US", { hour12: false });

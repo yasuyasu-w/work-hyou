@@ -16,10 +16,17 @@ import {
 import { useHistory } from "react-router-dom";
 import AppContext from "/src/context/AppContext";
 
-import { DELETE_NAME, CHANGE_FINE } from "/src/actions/actions";
+import {
+  DELETE_NAME,
+  CHANGE_FINE,
+  ADD_HISTORY_LOG
+} from "/src/actions/actions";
+
+import { nowtime } from "/src/nowtime";
 
 const WKTB = () => {
   const { state, dispatch } = useContext(AppContext);
+  const length = state.workmng.length;
   const history = useHistory();
   const initialState = [
     {
@@ -66,13 +73,19 @@ const WKTB = () => {
     }
   };
 
-  //結果ボタンを押してページ繊維
+  //出勤可ボタンを押してページ繊維
   const RegstBtn = () => {
     const yon = BtnCheck.filter(t => t.btn === true);
     if (BtnCheck.length === yon.length) {
       dispatch({
         type: CHANGE_FINE,
         fine: true
+      });
+
+      dispatch({
+        type: ADD_HISTORY_LOG,
+        description: `${state.workmng[length - 1].name}が出勤`,
+        historyAt: nowtime()
       });
 
       setTimeout(() => history.push("/resenlist"), 1500);
@@ -82,7 +95,6 @@ const WKTB = () => {
   const Goback = () => {
     //const Cancel = Names.filter(nm => nm.fine === true);
     //setNames(Cancel);
-    const length = state.workmng.length;
 
     dispatch({
       type: DELETE_NAME,

@@ -3,6 +3,8 @@ import { Frame, TopTitle, Header, Body, Delebtn, Cpletebtn } from "./styleset3";
 import { useHistory } from "react-router-dom";
 import AppContext from "/src/context/AppContext";
 import { DELETE_NAME } from "/src/actions/actions";
+import { DELETE_HISTORY_LOG } from "/src/actions/actions";
+import nowtime from "/src/nowtime";
 
 const Resenlist = () => {
   const { state, dispatch } = useContext(AppContext);
@@ -46,6 +48,24 @@ const Resenlist = () => {
           );
         })}
       </Frame>
+      <Frame>
+        <TopTitle>履歴</TopTitle>
+        <Header>
+          <div>名前</div>
+          <div>時間</div>
+        </Header>
+        {state.historyLogs.map((HL, index) => {
+          return (
+            <Body key="index">
+              <div>{HL.description}</div>
+              <div> {HL.historyAt}</div>
+            </Body>
+          );
+        })}
+      </Frame>
+      <Delebtn onClick={() => dispatch({ type: DELETE_HISTORY_LOG })}>
+        履歴削除
+      </Delebtn>
       <Cpletebtn onClick={() => history.push("/")}>終える</Cpletebtn>
     </>
   );
